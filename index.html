@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Starwar RPG - Senthil</title>
+  	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  	<link href="https://fonts.googleapis.com/css?family=Arima+Madurai" rel="stylesheet">
+  	
+  	<!-- Added link to the jQuery Library -->
+  	<script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+	<!-- Added a link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+
+<body>
+	<header>
+		<nav class="navbar navbar-default">
+		  <div class="container">
+				<div class = "navbar-center">
+					<img src="assets/images/starwars_logo.jpg" class = "logo"> 
+					Starwars RPG
+					<img src="assets/images/starwars_logo.jpg" class = "logo"> 
+		
+				<div class= "navbar-right">
+					<button type="submit" class="btn btn-default">Start Over</button>
+				</div>	
+				</div>
+			</div>
+		</nav>
+	</header>
+
+
+
+	<div class="container"><!-- Main Container -->
+		
+		<div class="row"> <!-- row one -->
+			<div class= "col-md-12">
+				<h3 class = "gameInstruction"> Select your Characters by clicking on it </h3>
+			</div>
+		</div><!-- close row one -->
+
+		<!-- Initizial display -->
+		<div class="row" id="intDisplay">
+		</div> <!-- close row 2 -->
+		
+	
+		<div class ="row">
+		<br>
+		<br>
+		<br>
+		</div>
+
+		<div class="row">
+			<div class = "col-md-3 userCharacter"> 
+			</div><!-- close UserChar-->
+			<div class = "col-md-6">
+				<button class="btn btn-default btn-lg">Attack</button>
+			</div>
+			<div class = "col-md-3 enemyCharcter">
+			</div><!-- close Pic 4 -->
+		
+		</div><!--close row -->
+
+		<div class="row">
+			<div class = "col-md-6"> 
+			</div> <!-- empty for now -->
+			<div class = "col-md-6">
+				<div class = "row" > <!-- row to hold enemy list -->
+					<h3 class = "gameInstruction"> Select your Enemy by clicking on it </h3>
+				</div>
+				<div class = "row" id="EnemyDisplay"> </div>
+				</div><!-- list of enemy options -->
+			</div>
+		</div><!--close last row -->
+
+	</div> <!--close container -->
+
+<script type="text/javascript">
+//Gobal Variable
+var isRoleSelect=false;
+var isEnemySelect = false;
+var userRole;
+var enemyRole;
+
+//Class for starwars Characters
+$( document ).ready(function() {
+function swCharacter(name, healthPoint, attackPower, counterPower, AttackIncrease,fileSource){
+	this.name = name;
+	this.healthPoint = healthPoint;
+	this.attackPower = attackPower;
+	this.counterPower = counterPower;
+	this.AttackIncrease = AttackIncrease;
+	this.isUsed = false;
+	this.fileSource = fileSource;
+	this.pic = "";
+	this.cap ="";
+	this.makeImgTag=function(){
+		this.pic= $('<img>');
+		this.pic.addClass('characterPic');
+		this.pic.attr('src',this.fileSource);
+	}//makeImage
+
+	//Creating caption do display info
+	this.makeCaptionTag = function() {
+		this.cap= $('<div>');
+		this.cap.addClass('caption');
+		this.cap.text(this.name + "  Health Point:  "+ this.healthPoint );
+	}//makeCaptionTag
+}
+
+//Arry to store the char on list
+
+var arrSwCharacter = [];
+arrSwCharacter.push(new swCharacter("Obi-Wan Kenobi",120, 8, 10, 6, "assets/images/obi-wan-kenobi.jpg"));
+arrSwCharacter.push(new swCharacter("Luck Skywalker",100, 8, 15, 6, "assets/images/luke-skywalker.jpg" ));
+arrSwCharacter.push(new swCharacter("Darth Sidious", 150, 20, 20, 6, "assets/images/dart_sidious.jpe" ));
+arrSwCharacter.push(new swCharacter("Darth Maul", 180, 25, 25, 6, "assets/images/darth_maul.jpg" ));
+
+
+//loop through the array and display the on the screen initiall
+
+for(var i=0; i < arrSwCharacter.length ; i++){
+
+// console.log(arrSwCharacter[i].name +"   " +arrSwCharacter[i].fileSource);
+
+//div to hold the image and caption
+var picHolder = $('<div>');
+picHolder.addClass('col-md-3 notSelected img-thumbnail');
+picHolder.attr('id','picHolder'+i);
+picHolder.attr('data-num', i);
+var a='#picHolder'+ i;
+$('#intDisplay').append(picHolder);
+
+arrSwCharacter[i].makeImgTag();
+arrSwCharacter[i].makeCaptionTag();
+
+//adding it to the pic 
+$(a).append(arrSwCharacter[i].pic, arrSwCharacter[i].cap);
+
+}
+
+
+//for selecting a the userRole 
+$('.notSelected').on("click", function() {
+
+	isRoleSelect = true;
+
+	//move the selected character to the specific area
+	var ind = parseInt($(this).data('num'));
+	arrSwCharacter[ind].isUsed = true;
+	userRole=arrSwCharacter[ind];
+	//console.log(userRole);
+	$('.userCharacter').addClass('img-thumbnail');
+	$('.userCharacter').append(userRole.pic, userRole.cap);
+
+	for(var i=0; i < arrSwCharacter.length; i++){
+		//Check to see if it is already selected
+		if(!arrSwCharacter[i].isUsed){
+
+			var picHolder = $('<div>');
+			picHolder.addClass('col-md-4 enemyList img-thumbnail');
+			picHolder.attr('id','ePicHolder'+i);
+			picHolder.attr('data-num', i);
+			var a='#ePicHolder'+ i;
+			$('#EnemyDisplay').append(picHolder);
+
+			//console.log(arrSwCharacter[i]);
+			//console.log(i);
+			$(a).append(arrSwCharacter[i].pic,arrSwCharacter[i].cap);
+		}
+	}
+
+	//empty the not selected section
+	$('#intDisplay').empty();
+
+	// selectEnemy();
+});//Closing clicked initial selection
+
+
+//Selecting enemy to fight with 
+
+//$(staticAncestors).on(eventName, dynamicChild, function() {});
+$('#EnemyDisplay').on("click", '.enemyList', function() {
+//if enemy is not selected it is moved to the fightinarea and it is removed from the list below
+
+if(!isEnemySelect){	
+	isEnemySelect=true;
+	var ind = parseInt($(this).data('num'));
+	arrSwCharacter[ind].isUsed = true;
+	enemyRole=arrSwCharacter[ind];
+	console.log(enemyRole);
+	$('.enemyCharcter').addClass('img-thumbnail');
+	$('.enemyCharcter').append(enemyRole.pic, enemyRole.cap);
+
+	$(this).removeClass('img-thumbnail enemyList');
+}
+
+$('button').on("click", function() {
+	alert("hiii");
+	userRole.healthPoint -= enemyRole.counterPower;
+	enemyRole.healthPoint -= userRole.attackPower;
+	console.log(userRole.healthPoint+"  "+enemyRole.healthPoint);
+	userRole.makeCaptionTag();
+	enemyRole.makeCaptionTag();
+
+	$('.userCharacter').append(userRole.cap); 
+
+});
+
+
+});//closing enemy click
+
+
+
+});//Closing on document ready
+</script>
+
+
+</body>
+</html>
