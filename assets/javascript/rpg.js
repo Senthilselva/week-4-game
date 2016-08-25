@@ -45,15 +45,17 @@ function writeToDamageDetails(){
 }
 
 //Arry to store the char on list
-
 var arrSwCharacter = [];
+
+
+function startGame()
+{
+
+arrSwCharacter = [];
 arrSwCharacter.push(new swCharacter("Obi-Wan Kenobi",120, 6, 10, 6, "assets/images/obi-wan-kenobi.jpg"));
 arrSwCharacter.push(new swCharacter("Luke Skywalker",180, 7, 14, 6, "assets/images/luke-skywalker.jpg" ));
 arrSwCharacter.push(new swCharacter("Darth Sidious", 400, 8, 12, 6, "assets/images/dart_sidious.jpe" ));
 arrSwCharacter.push(new swCharacter("Darth Maul", 150, 5, 8, 6, "assets/images/darth_maul.jpg" ));
-
-function startGame()
-{
 
 $('#intDisplay').empty();
 $('.userCharacter').empty();
@@ -154,7 +156,24 @@ $('button').on("click", function() {
 
 	//Selecting attack button
 	if(isEnemySelect && $(this).hasClass("attack")){
+
 		audioElement.play();
+		$(".userCharacter").animate({top:"-=30px"}, "fast");
+		$(".userCharacter").animate({left:"+=30px"}, "normal");
+		$(".userCharacter").animate({top:"+=30px"}, "fast");
+		$(".userCharacter").animate({left:"-=30px"}, "normal");
+		audioElement.play();
+
+		$(".enemyCharcter").animate({top:"-=30px"}, "fast");
+		$(".enemyCharcter").animate({left:"-=30px"}, "normal");
+		$(".enemyCharcter").animate({top:"+=30px"}, "fast");
+		$(".enemyCharcter").animate({left:"+=30px"}, "normal");
+		audioElement.play();
+
+		
+
+
+
 		//update heathPoints
 		userRole.healthPoint -= enemyRole.counterPower;
 		enemyRole.healthPoint -= userRole.attackPower;  
