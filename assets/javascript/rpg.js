@@ -6,7 +6,7 @@ var enemyRole;
 
 //audio
 var audioElement = document.createElement('audio');
-audioElement.setAttribute('src', 'assets/sounds/punch1.mp3');
+audioElement.setAttribute('src', 'assets/punch1.mp3');
 
 //Class for starwars Characters
 $( document ).ready(function() {
@@ -58,10 +58,10 @@ enemyRole=[];
 
 
 arrSwCharacter = [];
-arrSwCharacter.push(new swCharacter("Obi-Wan Kenobi",120, 6, 10, 6, "assets/images/obi-wan-kenobi.jpg"));
-arrSwCharacter.push(new swCharacter("Luke Skywalker",180, 7, 14, 6, "assets/images/luke-skywalker.jpg" ));
-arrSwCharacter.push(new swCharacter("Darth Sidious", 400, 8, 12, 6, "assets/images/dart_sidious.jpe" ));
-arrSwCharacter.push(new swCharacter("Darth Maul", 150, 5, 8, 6, "assets/images/darth_maul.jpg" ));
+arrSwCharacter.push(new swCharacter("Obi-Wan Kenobi",120, 6, 10, 6, "assets/obi-wan-kenobi.jpg"));
+arrSwCharacter.push(new swCharacter("Luke Skywalker",180, 7, 14, 6, "assets/luke-skywalker.jpg" ));
+arrSwCharacter.push(new swCharacter("Darth Sidious", 400, 8, 12, 6, "assets/dart_sidious.jpe" ));
+arrSwCharacter.push(new swCharacter("Darth Maul", 150, 5, 8, 6, "assets/darth_maul.jpg" ));
 
 //alert("aha aha ah");
 $('#intDisplay').empty();
