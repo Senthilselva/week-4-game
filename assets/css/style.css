@@ -3,11 +3,11 @@
 }
 
 body{
-	font-family: 'Arima Madurai', cursive;
+	font-family: 'Fjalla One', sans-serif;
 	font-size: 10px;
 	font-weight: bolder;
 	text-align:center;
-	/*background-image: url("../images/star-wars-background.jpg.");*/
+	background-image: url("../images/star-wars-background.jpg.");
 } 
 
 
@@ -15,6 +15,7 @@ body{
 	width: 50px;
 	height: 50px;
 }
+
 
 header{
 	font-size: 48px;
@@ -32,4 +33,27 @@ header{
 .enemyList
 {
 	background-color: red;
+}	
+
+.userCharacter
+.enemyCharcter{
+	font-size: 50px;
+}
+
+.damageDetails{
+	text-align:center;
+	font-size: 20px;
+	padding: 30px;
+	color: #ffff00;
+}
+
+.enemyInstruction,
+.gameInstruction{
+	font-size: 25px;
+	color: #ffff00;
+}
+
+.enemyInstruction,
+.attack{
+	display: none;
 }
