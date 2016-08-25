@@ -4,6 +4,9 @@ var isEnemySelect = false;
 var userRole;
 var enemyRole;
 
+//audio
+var audioElement = document.createElement('audio');
+audioElement.setAttribute('src', 'assets/sounds/punch1.mp3');
 
 //Class for starwars Characters
 $( document ).ready(function() {
@@ -151,6 +154,7 @@ $('button').on("click", function() {
 
 	//Selecting attack button
 	if(isEnemySelect && $(this).hasClass("attack")){
+		audioElement.play();
 		//update heathPoints
 		userRole.healthPoint -= enemyRole.counterPower;
 		enemyRole.healthPoint -= userRole.attackPower;  
