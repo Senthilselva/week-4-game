@@ -51,12 +51,19 @@ var arrSwCharacter = [];
 function startGame()
 {
 
+isRoleSelect=false;
+isEnemySelect = false;
+userRole=[];
+enemyRole=[];
+
+
 arrSwCharacter = [];
 arrSwCharacter.push(new swCharacter("Obi-Wan Kenobi",120, 6, 10, 6, "assets/images/obi-wan-kenobi.jpg"));
 arrSwCharacter.push(new swCharacter("Luke Skywalker",180, 7, 14, 6, "assets/images/luke-skywalker.jpg" ));
 arrSwCharacter.push(new swCharacter("Darth Sidious", 400, 8, 12, 6, "assets/images/dart_sidious.jpe" ));
 arrSwCharacter.push(new swCharacter("Darth Maul", 150, 5, 8, 6, "assets/images/darth_maul.jpg" ));
 
+//alert("aha aha ah");
 $('#intDisplay').empty();
 $('.userCharacter').empty();
 $('.enemyCharcter').empty();
